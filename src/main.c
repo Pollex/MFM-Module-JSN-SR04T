@@ -92,6 +92,27 @@ uint16_t get_distance_to_water(void) {
   return distance / 10;
 }
 
+/* Function to sort an array using insertion sort*/
+void insertionSort(int arr[], int n)
+{
+    int i, key, j;
+    for (i = 1; i < n; i++)
+    {
+        key = arr[i];
+        j = i - 1;
+ 
+        /* Move elements of arr[0..i-1], that are
+        greater than key, to one position ahead
+        of their current position */
+        while (j >= 0 && arr[j] > key)
+        {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
 volatile packet_t packet;
 void measurement(void) {
   SENSOR_5VEN_PORT.DIRSET = 1 << SENSOR_5VEN_PIN;
@@ -101,15 +122,16 @@ void measurement(void) {
   delay_ms(10);
   uart_init();
 
-  uint16_t medbuf[9] = {};
-  for (int i=0;i<9;i++){
-      medbuf[i] = get_distance_to_water();
+  uint16_t distanceMedianBuffer[13] = {};
+  for (int i=0;i<13;i++){
+      distanceMedianBuffer[i] = get_distance_to_water();
       delay_ms(10);
   }
+  insertionSort(distanceMedianBuffer, 13);
 
   packet = (packet_t){
-      .distance = medbuf[5],
-      .temperature = ds18b20_read(0),
+      .distance = distanceMedianBuffer[6],
+      .temperature = ds18b20_read(0)
   };
 }
 
