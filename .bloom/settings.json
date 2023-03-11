@@ -1,0 +1,62 @@
+{
+    "insight": {
+        "bottomPanelState": {
+            "open": false,
+            "size": 134
+        },
+        "eepromInspectionPaneState": {
+            "activated": false,
+            "attached": true
+        },
+        "leftPanelState": {
+            "open": false,
+            "size": 300
+        },
+        "mainWindowSize": {
+            "height": 536,
+            "width": 1000
+        },
+        "memoryInspectionPaneSettings": {
+            "eeprom": {
+                "excludedRegions": [
+                ],
+                "focusedRegions": [
+                ],
+                "hexViewerSettings": {
+                    "addressLabelType": "absolute",
+                    "displayAnnotations": true,
+                    "displayAsciiValues": false,
+                    "highlightFocusedMemory": true,
+                    "highlightHoveredRowAndCol": true,
+                    "highlightStackMemory": false
+                },
+                "refreshOnActivation": false,
+                "refreshOnTargetStop": false
+            },
+            "ram": {
+                "excludedRegions": [
+                ],
+                "focusedRegions": [
+                ],
+                "hexViewerSettings": {
+                    "addressLabelType": "absolute",
+                    "displayAnnotations": true,
+                    "displayAsciiValues": false,
+                    "highlightFocusedMemory": true,
+                    "highlightHoveredRowAndCol": true,
+                    "highlightStackMemory": true
+                },
+                "refreshOnActivation": false,
+                "refreshOnTargetStop": false
+            }
+        },
+        "ramInspectionPaneState": {
+            "activated": false,
+            "attached": true
+        },
+        "registersPaneState": {
+            "activated": false,
+            "attached": true
+        }
+    }
+}
