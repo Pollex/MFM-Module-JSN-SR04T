@@ -93,7 +93,7 @@ void insertionSort(uint16_t arr[], int n) {
     /* Move elements of arr[0..i-1], that are
     greater than key, to one position ahead
     of their current position */
-    while (j >= 0 && arr[j] > key) {
+    while (j >= 1 && arr[j] > key) {
       arr[j + 1] = arr[j];
       j = j - 1;
     }
@@ -111,9 +111,7 @@ volatile packet_t packet = {
 };
 volatile ds18b20_t ds18b20 = {.resolution = DS18B20_RES_12};
 void measurement(void) {
-  SENSOR_5VEN_PORT.DIRSET = 1 << SENSOR_5VEN_PIN;
   SENSOR_3V3EN_PORT.DIRSET = 1 << SENSOR_3V3EN_PIN;
-  SENSOR_5VEN_PORT.OUTSET = 1 << SENSOR_5VEN_PIN;
   SENSOR_3V3EN_PORT.OUTSET = 1 << SENSOR_3V3EN_PIN;
   ONEWIRE_Port.DIRCLR = 1 << ONEWIRE_Pin;
   delay_ms(10);
@@ -122,18 +120,21 @@ void measurement(void) {
 
   ds18b20_read(&ds18b20, 0);
   packet.temperature = ds18b20_read(&ds18b20, 0);
+  SENSOR_3V3EN_PORT.OUTCLR = 1 << SENSOR_3V3EN_PIN;
 
-  static uint16_t buf[MEDIAN_COUNT] = {};
+  SENSOR_5VEN_PORT.DIRSET = 1 << SENSOR_5VEN_PIN;
+  SENSOR_5VEN_PORT.OUTSET = 1 << SENSOR_5VEN_PIN;
+  delay_ms(10);
+
+  static uint16_t buf[MEDIAN_COUNT] = {0};
   for (int ix=0; ix < MEDIAN_COUNT; ix++) {
     buf[ix] = get_distance_to_water();
-    delay_ms(5);
+    delay_ms(15);
   }
-  insertionSort(&buf, MEDIAN_COUNT);
-
-  packet.distance = buf[MEDIAN_COUNT/2];
-
   SENSOR_5VEN_PORT.OUTCLR = 1 << SENSOR_5VEN_PIN;
-  SENSOR_3V3EN_PORT.OUTCLR = 1 << SENSOR_3V3EN_PIN;
+
+  insertionSort(&buf, MEDIAN_COUNT);
+  packet.distance = buf[MEDIAN_COUNT/2];
 }
 
 void twi_perform(uint8_t *buf, uint8_t length) {

@@ -37,3 +37,5 @@
 
 # http://github.com/github/gitignore
 .cache/
+
+compile_commands.json
