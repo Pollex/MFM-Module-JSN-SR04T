@@ -220,3 +220,5 @@ $RECYCLE.BIN/
 
 .cache/
 compile_commands.json
+exports/
+production/
