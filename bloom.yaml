@@ -1,16 +1,20 @@
 environments:
   default:
-    debugTool:
+    shutdownPostDebugSession: true
+
+    tool:
       name: "atmel-ice"
 
     target:
       name: "attiny1614"
       physicalInterface: "updi"
+      hardwareBreakpoints: true
 
-    debugServer:
+    server:
       name: "avr-gdb-rsp"
       ipAddress: "127.0.0.1"
-      port: 3333
+      port: 1442
+      rangeStepping: true
 
 insight:
-  enabled: true
+  activateOnStartup: false

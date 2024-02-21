@@ -11,6 +11,7 @@ extern "C" {
 #endif
 
 void uart_init(void);
+void uart_deinit(void);
 uint16_t uart_available(void);
 uint16_t uart_read(uint8_t *data, uint16_t len);
 void uart_write(uint8_t *data, uint16_t len);

@@ -26,9 +26,9 @@
                     "addressLabelType": "absolute",
                     "displayAnnotations": true,
                     "displayAsciiValues": false,
+                    "groupStackMemory": true,
                     "highlightFocusedMemory": true,
-                    "highlightHoveredRowAndCol": true,
-                    "highlightStackMemory": false
+                    "highlightHoveredRowAndCol": true
                 },
                 "refreshOnActivation": false,
                 "refreshOnTargetStop": false
@@ -42,9 +42,9 @@
                     "addressLabelType": "absolute",
                     "displayAnnotations": true,
                     "displayAsciiValues": false,
+                    "groupStackMemory": true,
                     "highlightFocusedMemory": true,
-                    "highlightHoveredRowAndCol": true,
-                    "highlightStackMemory": true
+                    "highlightHoveredRowAndCol": true
                 },
                 "refreshOnActivation": false,
                 "refreshOnTargetStop": false

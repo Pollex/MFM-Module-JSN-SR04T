@@ -13,6 +13,7 @@ uint16_t read_ix = 0;
 uint16_t write_ix = 0;
 
 void uart_init(void) {
+  cli();
   USART0.BAUD = (uint16_t)BAUD(UART_BAUD_RATE);
   USART0.CTRLA = USART_RXCIE_bm;
   USART0.CTRLB = 0;
@@ -30,6 +31,11 @@ void uart_init(void) {
 
   // Enable interrupts
   sei();
+}
+
+void uart_deinit(void) {
+  USART0.CTRLB &= ~(USART_TXEN_bm | USART_RXEN_bm);
+  PORTB.DIRCLR = PIN2_bm | PIN3_bm;
 }
 
 uint16_t uart_available(void) {
