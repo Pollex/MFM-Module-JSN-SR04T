@@ -13,7 +13,7 @@
 volatile uint8_t flag_perform_measurement = 0;
 
 ds18b20_t ds18b20 = {
-    .resolution = DS18B20_RES_9,
+    .resolution = DS18B20_RES_11,
     .port = &DS18B20_PORT,
     .pin = DS18B20_PIN,
     .addr = OW_CMD_SKIP,
