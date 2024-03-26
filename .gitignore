@@ -223,3 +223,4 @@ compile_commands.json
 exports/
 production/
 \#auto_saved_files\#
+build/

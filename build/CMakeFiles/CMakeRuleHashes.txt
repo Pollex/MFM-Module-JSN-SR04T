@@ -1,8 +1,0 @@
-# Hashes of file build rules.
-cbf7227ef9747327f046e9f9b7f33f8c src/CMakeFiles/mfm-sensor-module
-8d87279d5085e8d0f4ef793ada2a4e2d src/CMakeFiles/mfm-sensor-module_disassemble
-bd5666043b5a0bebf469e1310c0d9e41 src/CMakeFiles/mfm-sensor-module_upload
-9ca2475878c2a421f5407287da819f3c src/CMakeFiles/mfm-sensor-module_upload_eeprom
-3ed9a48c1bb294b860cebfb29b70f9d8 src/mfm-sensor-module-attiny1614-eeprom.hex
-1dd090a330931fb9248c8bc50731a756 src/mfm-sensor-module-attiny1614.hex
-a55a389738d142b6b5b4b9c548696a0b src/mfm-sensor-module-attiny1614.lst
