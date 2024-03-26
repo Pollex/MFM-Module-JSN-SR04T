@@ -28,7 +28,7 @@ volatile __attribute__((packed)) struct {
     uint16_t distance;
     float temperature;
 } packet = {
-    .distance = 0xDEAD,
+    .distance = 0xADDE,
     .temperature = 0xDEAD,
 };
 
@@ -68,10 +68,6 @@ void twi_perform(uint8_t *buf, uint8_t length) {
 void twi_read(uint8_t *buf, uint8_t length) {
     buf[0] = sizeof(packet);
     memcpy(&buf[1], &packet, buf[0]);
-    // uint8_t *ptr = &packet;
-    // for (int ix = 0; ix < buf[0]; ix++) {
-    //   buf[1 + ix] = *ptr++;
-    // }
 }
 
 twi_cmd_t twi_cmds[] = {

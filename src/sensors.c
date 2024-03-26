@@ -85,9 +85,12 @@ float get_temperature(ds18b20_t *ds18b20) {
 void sensors_poweron(void) {
   SENSOR_5VEN_PORT.DIRSET = 1 << SENSOR_5VEN_PIN;
   SENSOR_5VEN_PORT.OUTSET = 1 << SENSOR_5VEN_PIN;
+    OW_EN_PORT.DIRSET = 1 << OW_EN_PIN;
+    OW_EN_PORT.OUTSET = 1 << OW_EN_PIN;
   uart_init();
 }
 void sensors_poweroff(void) {
   SENSOR_5VEN_PORT.OUTCLR = 1 << SENSOR_5VEN_PIN;
+    OW_EN_PORT.OUTCLR = 1 << OW_EN_PIN;
   uart_deinit();
 }
