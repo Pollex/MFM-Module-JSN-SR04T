@@ -1,0 +1,9 @@
+/home/timvosch/src/mfm-module-jsnsr04t/build/CMakeFiles/edit_cache.dir
+/home/timvosch/src/mfm-module-jsnsr04t/build/CMakeFiles/rebuild_cache.dir
+/home/timvosch/src/mfm-module-jsnsr04t/build/src/CMakeFiles/mfm-sensor-module-attiny1614.elf.dir
+/home/timvosch/src/mfm-module-jsnsr04t/build/src/CMakeFiles/mfm-sensor-module.dir
+/home/timvosch/src/mfm-module-jsnsr04t/build/src/CMakeFiles/mfm-sensor-module_upload.dir
+/home/timvosch/src/mfm-module-jsnsr04t/build/src/CMakeFiles/mfm-sensor-module_upload_eeprom.dir
+/home/timvosch/src/mfm-module-jsnsr04t/build/src/CMakeFiles/mfm-sensor-module_disassemble.dir
+/home/timvosch/src/mfm-module-jsnsr04t/build/src/CMakeFiles/edit_cache.dir
+/home/timvosch/src/mfm-module-jsnsr04t/build/src/CMakeFiles/rebuild_cache.dir

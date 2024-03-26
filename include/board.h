@@ -4,16 +4,16 @@
 //
 // PIN CONFIG
 //
-#define SENSOR_5VEN_PORT PORTA
-#define SENSOR_5VEN_PIN PIN5_bp
+#define ENABLE_5V_PORT PORTA
+#define ENABLE_5V_PIN PIN5_bm
+#define ENABLE_3V3_PORT PORTA
+#define ENABLE_3V3_PIN PIN2_bm
 
 // PORT A
 #define SMBALERT_Port PORTA
 #define SMBALERT_Pin PIN6_bp
-#define OW_EN_PORT PORTA
-#define OW_EN_PIN PIN2_bp
-#define OW_PORT PORTA
-#define OW_PIN PIN3_bp
+#define DS18B20_PORT PORTA
+#define DS18B20_PIN PIN3_bp
 
 // PORT B
 #define I2C_Port PORTB

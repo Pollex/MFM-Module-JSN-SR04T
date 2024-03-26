@@ -1,0 +1,11 @@
+add_avr_executable(${PROJECT_NAME} 
+    app.c
+    app_ds18b20.c
+    app_jsnsr04t.c
+    mcu_onewire.c
+    mcu_twi.c
+    mcu_uart.c
+    os.c
+    os_lock.c
+    os_util.c
+)
