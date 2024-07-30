@@ -26,13 +26,13 @@ jobs:
       # Install dependencies
       - name: Install gcc-avr and cmake
         run: |
-          apt-get update 
-          apt-get install -y cmake
+          sudo apt-get update 
+          sudo apt-get install -y cmake
 
           mkdir /opt/avr-gcc
           cd /opt/avr-gcc
           wget https://github.com/ZakKemble/avr-gcc-build/releases/download/v14.1.0-1/avr-gcc-14.1.0-x64-linux.tar.bz2
-          tar -xf avr-gcc-14.1.0-x64-linux.tar.bz2 -C /
+          sudo tar -xf avr-gcc-14.1.0-x64-linux.tar.bz2 -C /
 
       # Configure and build using CMake
       - name: Build with CMake
