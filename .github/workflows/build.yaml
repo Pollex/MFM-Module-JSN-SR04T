@@ -19,7 +19,7 @@ jobs:
 
       # Install dependencies
       - name: Install gcc-avr and cmake
-        run: sudo apt-get update && sudo apt-get install -y gcc-avr cmake
+        run: sudo apt-get update && sudo apt-get install -y gcc-avr avr-libc cmake
 
       # Configure and build using CMake
       - name: Build with CMake
