@@ -3,6 +3,7 @@
 #include "board.h"
 #include "mcu_onewire.h"
 #include "mcu_twi.h"
+#include "mcu_uart.h"
 #include "os.h"
 #include "os_util.h"
 #include <avr/interrupt.h>
@@ -22,7 +23,7 @@ ds18b20_t ds18b20 = {
 volatile struct packet_t {
     uint16_t distance;
     float temperature;
-} packet;
+} packet = {0};
 
 /**
  * @brief Wait for the Watchdog to synchronize.
@@ -55,21 +56,35 @@ void pwr_init(void) {
     ENABLE_5V_PORT.DIRSET = ENABLE_5V_PIN;   // 5V_on as output
     ENABLE_3V3_PORT.DIRSET = ENABLE_3V3_PIN; // 3V3_on as output
 
-    PORTA.PIN0CTRL |= PORT_ISC_INPUT_DISABLE_gc | PORT_PULLUPEN_bm;
-    PORTA.PIN1CTRL |= PORT_ISC_INPUT_DISABLE_gc | PORT_PULLUPEN_bm;
-    PORTA.PIN4CTRL |= PORT_ISC_INPUT_DISABLE_gc | PORT_PULLUPEN_bm;
-    PORTA.PIN6CTRL |= PORT_ISC_INPUT_DISABLE_gc | PORT_PULLUPEN_bm;
-    PORTA.PIN7CTRL |= PORT_ISC_INPUT_DISABLE_gc | PORT_PULLUPEN_bm;
-
     pwr_3v3(0);
     pwr_5v(0);
 }
 
 void os_presleep() {
+    PORTA.PIN0CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN1CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN2CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN3CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN4CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN5CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN6CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN7CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+    PORTB.PIN2CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+    PORTB.PIN3CTRL |= PORT_ISC_INPUT_DISABLE_gc;
     wdt_disable();
     wdt_sync();
 }
 void os_postsleep() {
+    PORTA.PIN0CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN1CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN2CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN3CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN4CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN5CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN6CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
+    PORTA.PIN7CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
+    PORTB.PIN2CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
+    PORTB.PIN3CTRL &= ~PORT_ISC_INPUT_DISABLE_gc;
     wdt_enable(WDT_PERIOD_8KCLK_gc);
     wdt_sync();
 }
@@ -100,6 +115,7 @@ void perform_measurement(void) {
     pwr_3v3(1);
     pwr_5v(1);
     delay_ms(10);
+    uart_init();
 
     // Read temperature, first measurement after poweron is always an error
     int err = ds18b20_read(&ds18b20, &ds18b20_temperature);
@@ -117,6 +133,7 @@ void perform_measurement(void) {
     jsnsr04t_distance = jsnsr04t_distances[JSNSR04T_MEDIAN_COUNT / 2];
 
     // Shutdown the JSN-SR04T
+    uart_deinit();
     pwr_5v(0);
 
     packet.distance = jsnsr04t_distance;
