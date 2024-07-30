@@ -19,7 +19,17 @@ jobs:
 
       # Install dependencies
       - name: Install gcc-avr and cmake
-        run: sudo apt-get update && sudo apt-get install -y gcc-avr avr-libc cmake
+        run: |
+          sudo apt-get update 
+          sudo apt-get install -y gcc-avr avr-libc cmake
+          # Install AVR Libc from the specified URL
+          wget https://github.com/avrdudes/avr-libc/releases/download/avr-libc-2_2_1-release/avr-libc-2.2.1.tar.bz2
+          tar -xf avr-libc-2.2.1.tar.bz2
+          cd avr-libc-2.2.1
+          # Build and install AVR Libc
+          ./configure --build=`./config.guess` --host=avr
+          make
+          sudo make install
 
       # Configure and build using CMake
       - name: Build with CMake
