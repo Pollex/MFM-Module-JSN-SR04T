@@ -1,0 +1,37 @@
+name: Build module firmware
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository including submodules
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+
+      # Install dependencies
+      - name: Install gcc-avr and cmake
+        run: sudo apt-get update && sudo apt-get install -y gcc-avr cmake
+
+      # Configure and build using CMake
+      - name: Build with CMake
+        run: |
+         cmake --toolchain avr-gcc.toolchain.cmake -B build . 
+         make -C build
+
+      # Upload firmware binaries
+      - name: Upload firmware binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: |
+            build/src/mfm-sensor-module-attiny1614.elf
+            build/src/mfm-sensor-module-attiny1614.hex
