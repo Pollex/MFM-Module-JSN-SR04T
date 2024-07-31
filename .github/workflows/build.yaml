@@ -20,7 +20,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
-            /opt/avr-gcc
+            /avr-gcc-14.1.0-x64-linux.tar.bz2
           key: ${{ runner.os }}-avrlibc
 
       # Install dependencies
