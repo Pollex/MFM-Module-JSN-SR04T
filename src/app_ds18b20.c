@@ -29,7 +29,7 @@ uint16_t read_temp(ds18b20_t *d) {
     uint8_t undefined_bits = 3 - d->resolution;
     uint16_t value = ((uint16_t)msb << 8) | (uint16_t)lsb;
     value >>= undefined_bits;
-    value &= ~(((1 << undefined_bits)-1) << (12-undefined_bits));
+    value &= ~(((1 << undefined_bits) - 1) << (12 - undefined_bits));
     return value;
 }
 
@@ -83,7 +83,7 @@ int ds18b20_read(ds18b20_t *d, float *temperature) {
     set_resolution(d);
     convert_t(d);
 
-    //wait_convert(d->resolution);
+    // wait_convert(d->resolution);
 
     uint32_t start = millis();
     uint32_t now = start;
@@ -100,7 +100,11 @@ int ds18b20_read(ds18b20_t *d, float *temperature) {
     }
 
     // Convert
-    uint8_t sign = raw >> 15;
-    *temperature = (float)(raw & 0x7FFF) * get_res_bit(d->resolution) * (sign ? -1 : 1);
+    if (raw & 0x8000) {
+        raw = ((raw ^ 0xFFFF) + 1);
+        *temperature = raw * get_res_bit(d->resolution) * -1;
+    } else {
+        *temperature = raw * get_res_bit(d->resolution);
+    }
     return 0;
 }
